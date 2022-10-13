@@ -1,7 +1,8 @@
 # bird-controller
 
-<img alt="logo" src="img/logo.png" width="50%" style="display: block; margin: auto;">
-
+<p align="center">
+    <img alt="logo" src="img/logo.png" width="50%" style="display: block; margin: auto;">
+</>
 
 <br>
 
