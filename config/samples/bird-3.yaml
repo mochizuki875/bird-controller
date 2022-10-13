@@ -1,0 +1,12 @@
+apiVersion: bird.my.domain/v1
+kind: Bird
+metadata:
+  labels:
+    app.kubernetes.io/name: bird
+    app.kubernetes.io/instance: bird-sample
+    app.kubernetes.io/part-of: bird-controller
+    app.kuberentes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: bird-controller
+  name: bird-3
+spec:
+  eggNumbers: 4

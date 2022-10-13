@@ -1,0 +1,59 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  creationTimestamp: null
+  name: manager-role
+rules:
+- apiGroups:
+  - bird.my.domain
+  resources:
+  - birds
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - bird.my.domain
+  resources:
+  - birds/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - bird.my.domain
+  resources:
+  - birds/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - bird.my.domain
+  resources:
+  - eggs
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - bird.my.domain
+  resources:
+  - eggs/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - bird.my.domain
+  resources:
+  - eggs/status
+  verbs:
+  - get
+  - patch
+  - update

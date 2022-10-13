@@ -1,0 +1,31 @@
+# permissions for end users to edit birds.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: clusterrole
+    app.kubernetes.io/instance: bird-editor-role
+    app.kubernetes.io/component: rbac
+    app.kubernetes.io/created-by: bird-controller
+    app.kubernetes.io/part-of: bird-controller
+    app.kubernetes.io/managed-by: kustomize
+  name: bird-editor-role
+rules:
+- apiGroups:
+  - bird.my.domain
+  resources:
+  - birds
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - bird.my.domain
+  resources:
+  - birds/status
+  verbs:
+  - get

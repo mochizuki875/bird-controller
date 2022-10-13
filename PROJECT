@@ -1,0 +1,24 @@
+domain: my.domain
+layout:
+- go.kubebuilder.io/v3
+projectName: bird-controller
+repo: example.com/bird-controller
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: my.domain
+  group: bird
+  kind: Bird
+  path: example.com/bird-controller/api/v1
+  version: v1
+- api:
+    crdVersion: v1
+    namespaced: true
+  domain: my.domain
+  group: bird
+  kind: Egg
+  path: example.com/bird-controller/api/v1
+  version: v1
+version: "3"

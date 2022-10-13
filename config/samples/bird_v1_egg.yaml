@@ -1,0 +1,12 @@
+apiVersion: bird.my.domain/v1
+kind: Egg
+metadata:
+  labels:
+    app.kubernetes.io/name: egg
+    app.kubernetes.io/instance: egg-sample
+    app.kubernetes.io/part-of: bird-controller
+    app.kuberentes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: bird-controller
+  name: egg-sample
+spec:
+  # TODO(user): Add fields here

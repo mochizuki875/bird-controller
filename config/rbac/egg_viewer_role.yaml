@@ -1,0 +1,27 @@
+# permissions for end users to view eggs.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: clusterrole
+    app.kubernetes.io/instance: egg-viewer-role
+    app.kubernetes.io/component: rbac
+    app.kubernetes.io/created-by: bird-controller
+    app.kubernetes.io/part-of: bird-controller
+    app.kubernetes.io/managed-by: kustomize
+  name: egg-viewer-role
+rules:
+- apiGroups:
+  - bird.my.domain
+  resources:
+  - eggs
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - bird.my.domain
+  resources:
+  - eggs/status
+  verbs:
+  - get
