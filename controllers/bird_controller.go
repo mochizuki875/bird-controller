@@ -67,7 +67,7 @@ func (r *BirdReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.
 		return ctrl.Result{}, err
 	}
 
-	// ③BirdリソースからEggNumbersを取得
+	// ③BirdリソースのEggNumbersと実際のEggリソース数を比較し増減処理
 	eggNumber := *bird.Spec.EggNumbers
 
 	// EggNumberと取得したEgg数を比較
@@ -106,7 +106,7 @@ func (r *BirdReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.
 		}
 	}
 
-	// ④Statusを更新
+	// ④BirdリソースのStatusを更新
 	eggNumberFlag := false
 
 	// Birdリソースが管理するEgg一覧を取得
@@ -144,21 +144,6 @@ var (
 	eggOwnerKey = ".metadata.controller"
 	apiGVStr    = birdv1.GroupVersion.String()
 )
-
-// SetupWithManager sets up the controller with the Manager.
-
-func (r *BirdReconciler) SetupWithManager(mgr ctrl.Manager) error {
-
-	// cache上のEggリソースにOwnerReferenceに基づくIndexを付与
-	if err := mgr.GetFieldIndexer().IndexField(context.Background(), &birdv1.Egg{}, eggOwnerKey, IndexByOwner); err != nil {
-		return err
-	}
-
-	return ctrl.NewControllerManagedBy(mgr).
-		For(&birdv1.Bird{}).
-		Owns(&birdv1.Egg{}). // このリソースに変更があったらOwnリソースをreconcileする
-		Complete(r)
-}
 
 // OwnerReferenceの付与状況を確認し、Indexとして付与する値を決める関数
 func IndexByOwner(rawObj client.Object) []string {
@@ -240,4 +225,19 @@ func (r *BirdReconciler) CreateEgg(ctx context.Context, log logr.Logger, bird *b
 
 	return nil
 
+}
+
+// SetupWithManager sets up the controller with the Manager.
+
+func (r *BirdReconciler) SetupWithManager(mgr ctrl.Manager) error {
+
+	// cache上のEggリソースにOwnerReferenceに基づくIndexを付与
+	if err := mgr.GetFieldIndexer().IndexField(context.Background(), &birdv1.Egg{}, eggOwnerKey, IndexByOwner); err != nil {
+		return err
+	}
+
+	return ctrl.NewControllerManagedBy(mgr).
+		For(&birdv1.Bird{}).
+		Owns(&birdv1.Egg{}). // このリソースに変更があったらOwnリソースをreconcileする
+		Complete(r)
 }
