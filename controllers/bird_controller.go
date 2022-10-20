@@ -82,8 +82,8 @@ func (r *BirdReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.
 		excessiveEggList := eggList.Items[eggNumber:]
 
 		for _, egg := range excessiveEggList {
-			log.Info("Delete Egg: " + egg.Name)
-			// log.Info(egg.Name + "を叩き割る。")
+			// log.Info("Delete Egg: " + egg.Name)
+			log.Info(egg.Name + "を叩き割る。")
 			if err = r.Delete(ctx, &egg); err != nil {
 				log.Error(err, "Faild to delete Egg")
 				return ctrl.Result{}, err
@@ -194,8 +194,8 @@ func (r *BirdReconciler) CreateEgg(ctx context.Context, log logr.Logger, bird *b
 		},
 	}
 
-	log.Info("Create Egg: " + egg.Name)
-	// log.Info(egg.Name + "を産卵しました！")
+	// log.Info("Create Egg: " + egg.Name)
+	log.Info(egg.Name + "を産卵しました！")
 
 	if _, err := ctrl.CreateOrUpdate(ctx, r.Client, egg, func() error {
 
