@@ -118,14 +118,11 @@ func (r *BirdReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.
 	eggListLen := int32(0)
 	eggListLen = int32(len(eggList.Items))
 
-	statusEggnum := int32(0)
-	if bird.Status.EggNumbers != nil {
-		statusEggnum = *bird.Status.EggNumbers
-	}
+	statusEggnum := bird.Status.EggNumbers
 
 	// Birdリソースの.Status.EggNumbersとeggListLenの差分比較を行い、差分があれば.Status.EggNumbersを更新
 	if statusEggnum != eggListLen {
-		bird.Status.EggNumbers = &eggListLen
+		bird.Status.EggNumbers = eggListLen
 		eggNumberFlag = true
 	}
 

@@ -27,7 +27,7 @@ type BirdSpec struct {
 
 // BirdStatus defines the observed state of Bird
 type BirdStatus struct {
-	EggNumbers *int32 `json:"eggNumbers,omitempty"`
+	EggNumbers int32 `json:"eggNumbers,omitempty"`
 }
 
 // +kubebuilder:object:root=true
